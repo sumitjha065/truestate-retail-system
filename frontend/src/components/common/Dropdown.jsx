@@ -1,6 +1,21 @@
+/**
+ * @file Dropdown.jsx
+ * @description Reusable dropdown component with support for single/multi-select and custom styling.
+ */
 import React, { useState, useRef, useEffect } from 'react';
 import { ChevronDown } from 'lucide-react';
 
+/**
+ * Dropdown Component
+ * @param {Object} props
+ * @param {string} props.label - Label text above the dropdown.
+ * @param {Array} props.options - Array of option objects { value, label, count? }.
+ * @param {any} props.value - Selected value(s). Array if multiple, single value otherwise.
+ * @param {Function} props.onChange - Callback with new value(s).
+ * @param {boolean} [props.multiple=false] - Support multi-selection.
+ * @param {string} [props.placeholder='Select...'] - Placeholder text.
+ * @param {string} [props.className=''] - Additional CSS classes.
+ */
 const Dropdown = ({
   label,
   options = [],
@@ -28,13 +43,13 @@ const Dropdown = ({
     if (multiple) {
       const newValue = Array.isArray(value) ? [...value] : [];
       const index = newValue.indexOf(optionValue);
-      
+
       if (index > -1) {
         newValue.splice(index, 1);
       } else {
         newValue.push(optionValue);
       }
-      
+
       onChange(newValue);
     } else {
       onChange(optionValue);
@@ -51,7 +66,7 @@ const Dropdown = ({
       <div className="mb-2">
         {label && <label className="block text-sm font-medium text-gray-700 mb-1">{label}</label>}
       </div>
-      
+
       <button
         type="button"
         onClick={() => setIsOpen(!isOpen)}
@@ -63,8 +78,9 @@ const Dropdown = ({
         <ChevronDown className={`w-5 h-5 text-gray-400 transition-transform duration-200 ${isOpen ? 'transform rotate-180' : ''}`} />
       </button>
 
+      {/* Dropdown Menu */}
       {isOpen && (
-        <div className="absolute z-10 w-full mt-1 bg-white border border-gray-200 rounded-lg shadow-lg max-h-60 overflow-auto">
+        <div className="absolute z-20 w-fit min-w-full mt-1 bg-white border border-gray-200 rounded-lg shadow-xl max-h-60 overflow-auto">
           {options.length === 0 ? (
             <div className="px-4 py-2 text-sm text-gray-500">No options available</div>
           ) : (
@@ -77,15 +93,13 @@ const Dropdown = ({
                 <div
                   key={option.value}
                   onClick={() => handleSelect(option.value)}
-                  className={`px-4 py-2.5 text-sm cursor-pointer transition-colors duration-150 hover:bg-blue-50 ${
-                    isSelected ? 'bg-blue-50 text-blue-600 font-medium' : 'text-gray-700'
-                  }`}
+                  className={`px-4 py-2.5 text-sm cursor-pointer transition-colors duration-150 hover:bg-blue-50 ${isSelected ? 'bg-blue-50 text-blue-600 font-medium' : 'text-gray-700'
+                    }`}
                 >
                   <div className="flex items-center">
                     {multiple && (
-                      <div className={`w-4 h-4 border rounded mr-3 flex items-center justify-center ${
-                        isSelected ? 'bg-blue-600 border-blue-600' : 'border-gray-300'
-                      }`}>
+                      <div className={`w-4 h-4 flex-shrink-0 border rounded mr-3 flex items-center justify-center ${isSelected ? 'bg-blue-600 border-blue-600' : 'border-gray-300'
+                        }`}>
                         {isSelected && (
                           <svg className="w-3 h-3 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" />
@@ -93,9 +107,14 @@ const Dropdown = ({
                         )}
                       </div>
                     )}
-                    {option.label}
+
+                    {/* Label with truncation support */}
+                    <span className="truncate whitespace-nowrap">
+                      {option.label}
+                    </span>
+
                     {option.count !== undefined && (
-                      <span className="ml-auto text-xs text-gray-500 bg-gray-100 px-2 py-1 rounded">
+                      <span className="ml-auto flex-shrink-0 text-xs text-gray-500 bg-gray-100 px-2 py-1 rounded">
                         {option.count}
                       </span>
                     )}

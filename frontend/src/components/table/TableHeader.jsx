@@ -8,14 +8,14 @@ import { TABLE_COLUMNS } from "../../utils/constants";
 
 const TableHeader = ({ sortBy, sortOrder, onSort }) => {
   return (
-    <thead className="bg-[#F9FAFB] border-b border-gray-200">
+    <thead className="bg-[#1f2937]"> {/* Dark background matching image */}
       <tr>
         {TABLE_COLUMNS.map((column) => (
           <th
             key={column.key}
             style={{ width: column.width || 'auto' }}
-            className={`px-6 py-4 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider whitespace-nowrap
-              ${column.sortable ? "cursor-pointer hover:bg-gray-100 transition-colors" : ""}`}
+            className={`px-4 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider whitespace-nowrap
+              ${column.sortable ? "cursor-pointer hover:bg-gray-700 transition-colors" : ""}`}
             onClick={() => column.sortable && onSort(column.key)}
           >
             <div className="flex items-center gap-2">

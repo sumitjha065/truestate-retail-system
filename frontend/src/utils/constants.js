@@ -1,19 +1,19 @@
 // Add this NEW TABLE_COLUMNS
+// Table Columns Configuration
 export const TABLE_COLUMNS = [
-  { key: "Transaction ID", label: "Transaction ID", sortable: true, width: "120px" },
+  { key: "Transaction ID", label: "Transaction ID", sortable: true, width: "130px" },
   { key: "Date", label: "Date", sortable: true, width: "120px" },
-  { key: "Customer ID", label: "Customer ID", sortable: false, width: "140px" },
-  { key: "Customer Name", label: "Customer Name", sortable: true, width: "160px" },
-  { key: "Phone Number", label: "Phone Number", sortable: false, width: "150px" },
+  { key: "Customer ID", label: "Customer ID", sortable: false, width: "120px" },
+  { key: "Customer Name", label: "Customer Name", sortable: true, width: "150px" },
+  { key: "Phone Number", label: "Phone Number", sortable: false, width: "160px" },
   { key: "Gender", label: "Gender", sortable: true, width: "100px" },
   { key: "Age", label: "Age", sortable: true, width: "80px" },
   { key: "Product Category", label: "Product Category", sortable: true, width: "150px" },
   { key: "Quantity", label: "Quantity", sortable: true, width: "100px" },
   { key: "Total Amount", label: "Total Amount", sortable: true, width: "140px" },
-  { key: "Discount Percentage", label: "Discount %", sortable: true, width: "100px" },
-  { key: "Final Amount", label: "Final Amount", sortable: true, width: "140px" },
   { key: "Customer Region", label: "Customer Region", sortable: true, width: "150px" },
-  { key: "Order Status", label: "Order Status", sortable: true, width: "140px" },
+  { key: "Product ID", label: "Product ID", sortable: true, width: "120px" },
+  { key: "Employee Name", label: "Employee Name", sortable: true, width: "150px" },
 ];
 
 

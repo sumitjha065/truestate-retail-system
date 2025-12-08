@@ -17,69 +17,81 @@ const TableRow = ({ transaction, isSelected, onSelect }) => {
 
   return (
     <tr
-      className={`group transition-colors duration-150 ${classes}`}
-      onMouseEnter={() => setHovered(true)}
-      onMouseLeave={() => setHovered(false)}
+      className={`group transition-colors duration-150 border-b border-gray-200 hover:bg-gray-50
+        ${isSelected ? "bg-blue-50" : ""}
+      `}
       onClick={() => onSelect && onSelect(transaction)}
     >
-      <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
-        #{transaction["Transaction ID"]}
+      {/* 1. Transaction ID */}
+      <td className="px-4 py-3 whitespace-nowrap text-sm text-gray-600">
+        {transaction["Transaction ID"]}
       </td>
 
-      <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+      {/* 2. Date */}
+      <td className="px-4 py-3 whitespace-nowrap text-sm text-gray-500">
         {formatters.formatDate(transaction.Date)}
       </td>
 
-      <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+      {/* 3. Customer ID */}
+      <td className="px-4 py-3 whitespace-nowrap text-sm text-gray-900 font-medium">
         {transaction["Customer ID"]}
       </td>
 
-      <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+      {/* 4. Customer Name */}
+      <td className="px-4 py-3 whitespace-nowrap text-sm text-gray-600">
         {transaction["Customer Name"]}
       </td>
 
-      <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500 font-mono">
-        {formatters.formatPhoneNumber(transaction["Phone Number"])}
+      {/* 5. Phone Number (with Copy Icon) */}
+      <td className="px-4 py-3 whitespace-nowrap text-sm text-gray-500 font-mono">
+        <div className="flex items-center gap-2">
+          {formatters.formatPhoneNumber(transaction["Phone Number"])}
+          <button
+            className="text-gray-400 hover:text-blue-600 transition-colors p-1"
+            title="Copy Number"
+          >
+            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect width="14" height="14" x="8" y="8" rx="2" ry="2" /><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2" /></svg>
+          </button>
+        </div>
       </td>
 
-      <td className="px-6 py-4 whitespace-nowrap text-sm">
-        <span
-          className={`px-3 py-1 rounded-full text-xs font-medium border ${transaction.Gender === "Male"
-              ? "bg-blue-50 text-blue-700 border-blue-100"
-              : "bg-pink-50 text-pink-700 border-pink-100"
-            }`}
-        >
-          {transaction.Gender}
-        </span>
+      {/* 6. Gender */}
+      <td className="px-4 py-3 whitespace-nowrap text-sm text-gray-600">
+        {transaction.Gender}
       </td>
 
-      <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+      {/* 7. Age */}
+      <td className="px-4 py-3 whitespace-nowrap text-sm text-gray-600">
         {transaction.Age}
       </td>
 
-      <td className="px-6 py-4 whitespace-nowrap">
-        <span className="px-3 py-1 bg-green-50 text-green-700 border border-green-100 text-xs rounded-full font-medium">
-          {transaction["Product Category"]}
-        </span>
+      {/* 8. Product Category (Bold, no pill) */}
+      <td className="px-4 py-3 whitespace-nowrap text-sm font-semibold text-gray-800">
+        {transaction["Product Category"]}
       </td>
 
-      <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500 text-center">
+      {/* 9. Quantity */}
+      <td className="px-4 py-3 whitespace-nowrap text-sm text-gray-900 font-medium">
         {String(transaction.Quantity).padStart(2, '0')}
       </td>
 
-      <td className="px-6 py-4 whitespace-nowrap text-sm font-bold text-gray-900">
+      {/* 10. Total Amount (Bold) */}
+      <td className="px-4 py-3 whitespace-nowrap text-sm font-bold text-gray-900">
         ₹ {formatters.formatNumber(transaction["Total Amount"])}
       </td>
 
-      <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+      {/* 11. Customer Region */}
+      <td className="px-4 py-3 whitespace-nowrap text-sm text-gray-900 font-medium">
         {transaction["Customer Region"]}
       </td>
 
-      <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-400">
-        {transaction["Product ID"]}
+      {/* 12. Product ID */}
+      <td className="px-4 py-3 whitespace-nowrap text-sm text-gray-600">
+        {transaction["Product ID"] || "PROD001"}
       </td>
 
-      <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+      {/* 13. Employee Name */}
+      <td className="px-4 py-3 whitespace-nowrap text-sm text-gray-900 font-medium">
         {transaction["Employee Name"]}
       </td>
     </tr>

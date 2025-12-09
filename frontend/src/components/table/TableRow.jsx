@@ -8,6 +8,15 @@ import { formatters } from "../../utils/formatters";
 
 const TableRow = ({ transaction, isSelected, onSelect }) => {
   const [hovered, setHovered] = useState(false);
+  const [copied, setCopied] = useState(false);
+
+  const handleCopy = (e, text) => {
+    e.stopPropagation(); // Prevent row selection
+    navigator.clipboard.writeText(text).then(() => {
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
+    });
+  };
 
   const classes = `
     border-b border-gray-200 
@@ -47,10 +56,15 @@ const TableRow = ({ transaction, isSelected, onSelect }) => {
         <div className="flex items-center gap-2">
           {formatters.formatPhoneNumber(transaction["Phone Number"])}
           <button
-            className="text-gray-400 hover:text-blue-600 transition-colors p-1"
+            onClick={(e) => handleCopy(e, transaction["Phone Number"])}
+            className={`transition-colors p-1 ${copied ? 'text-green-600' : 'text-gray-400 hover:text-blue-600'}`}
             title="Copy Number"
           >
-            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect width="14" height="14" x="8" y="8" rx="2" ry="2" /><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2" /></svg>
+            {copied ? (
+              <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polyline points="20 6 9 17 4 12" /></svg>
+            ) : (
+              <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect width="14" height="14" x="8" y="8" rx="2" ry="2" /><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2" /></svg>
+            )}
           </button>
         </div>
       </td>

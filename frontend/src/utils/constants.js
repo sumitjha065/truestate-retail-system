@@ -18,9 +18,12 @@ export const TABLE_COLUMNS = [
 
 
 export const SORT_OPTIONS = [
-  { value: 'Date', label: 'Date (Newest First)' },
-  { value: 'Quantity', label: 'Quantity (High to Low)' },
-  { value: 'Customer Name', label: 'Customer Name (A-Z)' },
+  { value: 'Date-desc', label: 'Date (Newest First)' },
+  { value: 'Date-asc', label: 'Date (Oldest First)' },
+  { value: 'Quantity-desc', label: 'Quantity (High to Low)' },
+  { value: 'Quantity-asc', label: 'Quantity (Low to High)' },
+  { value: 'Customer Name-asc', label: 'Customer Name (A-Z)' },
+  { value: 'Customer Name-desc', label: 'Customer Name (Z-A)' },
 ];
 
 export const GENDER_OPTIONS = [

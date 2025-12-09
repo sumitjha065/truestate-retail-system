@@ -158,14 +158,23 @@ export const useTransactions = () => {
     setPage(1);
   }, []);
 
-  const handleSort = useCallback((newSortBy) => {
+  const handleSort = useCallback((sortInput) => {
+    // Check if input is a composite string "Field-Order" from dropdown
+    if (typeof sortInput === 'string' && sortInput.includes('-')) {
+      const [field, order] = sortInput.split('-');
+      setSortBy(field);
+      setSortOrder(order);
+      return;
+    }
+
+    // Default toggle behavior (for table headers)
     setSortBy((prevSortBy) => {
-      if (prevSortBy === newSortBy) {
+      if (prevSortBy === sortInput) {
         setSortOrder((prevOrder) => (prevOrder === "asc" ? "desc" : "asc"));
         return prevSortBy;
       } else {
-        setSortOrder(newSortBy === "Date" ? "desc" : "asc");
-        return newSortBy;
+        setSortOrder(sortInput === "Date" ? "desc" : "asc");
+        return sortInput;
       }
     });
   }, []);

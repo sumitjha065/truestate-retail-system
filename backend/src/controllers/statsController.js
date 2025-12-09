@@ -44,8 +44,16 @@ const buildFilters = (query) => {
   const status = normalizeArray(query.orderStatus);
   if (status) filter["Order Status"] = { $in: status };
 
+  /* Regex based tag filter */
   const tags = normalizeArray(query.tags);
-  if (tags) filter["Tags"] = { $in: tags };
+  if (tags) {
+    if (!filter.$and) filter.$and = [];
+    filter.$and.push({
+      $or: tags.map((tag) => ({
+        "Tags": { $regex: tag.trim(), $options: "i" },
+      })),
+    });
+  }
 
   // 3. Age Range (Handle JSON string & String-in-DB types)
   let ageData = query.ageRange;

@@ -8,6 +8,7 @@ import {
   GENDER_OPTIONS,
   PAYMENT_METHODS,
   ORDER_STATUSES,
+  TAG_OPTIONS,
 } from '../../utils/constants';
 
 // FilterBar Component
@@ -24,8 +25,9 @@ const FilterBar = ({
     [];
   const categoryOptions =
     filterOptions.categories?.map((cat) => ({ value: cat, label: cat })) || [];
-  const tagOptions =
-    filterOptions.tags?.map((tag) => ({ value: tag, label: tag })) || [];
+
+  // Use static TAG_OPTIONS
+  const tagOptions = TAG_OPTIONS;
 
   const handleClearAll = () => {
     onFilterChange('customerRegion', []);

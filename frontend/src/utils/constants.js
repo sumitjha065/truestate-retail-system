@@ -48,8 +48,25 @@ export const ORDER_STATUSES = [
 
 export const DELIVERY_TYPES = [
   { value: 'Standard', label: 'Standard' },
-  { value: 'Express', label: 'Express' },
   { value: 'Store Pickup', label: 'Store Pickup' },
+];
+
+export const TAG_OPTIONS = [
+  { value: 'Organic', label: 'Organic' },
+  { value: 'Skincare', label: 'Skincare' },
+  { value: 'Portable', label: 'Portable' },
+  { value: 'Wireless', label: 'Wireless' },
+  { value: 'Gadgets', label: 'Gadgets' },
+  { value: 'Casual', label: 'Casual' },
+  { value: 'Fashion', label: 'Fashion' },
+  { value: 'Unisex', label: 'Unisex' },
+  { value: 'Makeup', label: 'Makeup' },
+  { value: 'Cotton', label: 'Cotton' },
+  { value: 'Smart', label: 'Smart' },
+  { value: 'Accessories', label: 'Accessories' },
+  { value: 'Formal', label: 'Formal' },
+  { value: 'Beauty', label: 'Beauty' },
+  { value: 'Fragrance-free', label: 'Fragrance-free' },
 ];
 
 export const DEFAULT_FILTERS = {

@@ -189,7 +189,14 @@ transactionSchema.statics.searchWithFilters = async function ({
   if (filters.productCategory?.length)
     query["Product Category"] = { $in: filters.productCategory };
 
-  if (filters.tags?.length) query["Tags"] = { $in: filters.tags };
+  if (filters.tags?.length) {
+    if (!query.$and) query.$and = [];
+    query.$and.push({
+      $or: filters.tags.map((tag) => ({
+        "Tags": { $regex: tag.trim(), $options: "i" },
+      })),
+    });
+  }
 
   if (filters.paymentMethod?.length)
     query["Payment Method"] = { $in: filters.paymentMethod };

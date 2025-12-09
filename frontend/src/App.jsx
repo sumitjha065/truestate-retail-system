@@ -1,12 +1,13 @@
 import React from 'react';
 import { Toaster } from 'react-hot-toast';
 import Dashboard from './pages/Dashboard';
+import Layout from './components/layout/Layout';
 import './styles/globals.css';
 import './styles/theme.css';
 
 function App() {
   return (
-    <>
+    <Layout>
       <Dashboard />
       <Toaster
         position="top-right"
@@ -30,7 +31,7 @@ function App() {
           },
         }}
       />
-    </>
+    </Layout>
   );
 }
 

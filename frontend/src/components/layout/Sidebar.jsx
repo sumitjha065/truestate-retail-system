@@ -1,124 +1,142 @@
-import React from 'react';
-import { 
-  Home, 
-  BarChart3, 
-  Users, 
-  Settings, 
+import React, { useState } from 'react';
+import {
+  LayoutDashboard,
+  Box,
   FileText,
-  CreditCard,
+  ChevronDown,
+  ChevronRight,
+  Monitor,
+  ShieldCheck,
+  Ban,
+  XCircle,
+  FileCheck,
+  FileClock,
   User,
-  LogOut
+  LogOut,
+  Vault
 } from 'lucide-react';
 
 const Sidebar = () => {
-  const menuItems = [
-    { icon: <Home className="w-5 h-5" />, label: 'Dashboard', active: false },
-    { icon: <BarChart3 className="w-5 h-5" />, label: 'Nexus', active: false },
-    { icon: <Users className="w-5 h-5" />, label: 'Invoke', active: false },
-    { icon: <Settings className="w-5 h-5" />, label: 'Services', active: false },
-  ];
+  // State for expanded sections
+  const [expanded, setExpanded] = useState({
+    services: true,
+    invoices: true
+  });
 
-  const preActiveItems = [
-    { label: 'Active', active: true },
-    { label: 'Blocked', active: false },
-    { label: 'Closed', active: false },
-  ];
-
-  const footerItems = [
-    { icon: <FileText className="w-5 h-5" />, label: 'Invoices' },
-    { icon: <CreditCard className="w-5 h-5" />, label: 'Performa Invoices' },
-    { icon: <FileText className="w-5 h-5" />, label: 'Final Invoices' },
-  ];
+  const toggleSection = (section) => {
+    setExpanded(prev => ({
+      ...prev,
+      [section]: !prev[section]
+    }));
+  };
 
   return (
-    <div className="w-64 bg-sidebar text-white h-screen flex flex-col fixed left-0 top-0 z-10">
-      {/* Logo */}
-      <div className="p-6 border-b border-gray-700">
-        <h1 className="text-2xl font-bold">Vault</h1>
-      </div>
-
-      {/* User Info */}
-      <div className="p-6 border-b border-gray-700">
-        <div className="flex items-center">
-          <div className="w-10 h-10 rounded-full bg-gray-600 flex items-center justify-center mr-3">
-            <User className="w-6 h-6" />
-          </div>
-          <div>
-            <p className="font-medium">Anurag Yadav</p>
-            <p className="text-sm text-gray-400">Admin</p>
-          </div>
+    <aside className="w-64 bg-white h-screen flex flex-col border-r border-gray-200 fixed left-0 top-0 z-50 overflow-y-auto font-sans">
+      {/* Header / Logo */}
+      <div className="p-4 border-b border-gray-100 flex items-center gap-3">
+        <div className="bg-black text-white p-1.5 rounded-lg">
+          <Vault size={20} />
+        </div>
+        <div>
+          <h1 className="text-lg font-bold text-gray-900 leading-tight">Vault</h1>
+          <p className="text-xs text-gray-500">Sumit Jha</p>
         </div>
       </div>
 
       {/* Main Navigation */}
-      <div className="flex-1 overflow-y-auto py-4">
-        <nav className="px-4 space-y-1">
-          {menuItems.map((item, index) => (
-            <a
-              key={index}
-              href="#"
-              className={`sidebar-link ${item.active ? 'sidebar-link-active' : ''}`}
-            >
-              {item.icon}
-              <span className="ml-3">{item.label}</span>
-            </a>
-          ))}
+      <nav className="flex-1 px-3 py-4 space-y-1">
 
-          {/* Pre-active Section */}
-          <div className="mt-6">
-            <a
-              href="#"
-              className="sidebar-link sidebar-link-active bg-purple-600"
-            >
-              <Settings className="w-5 h-5" />
-              <span className="ml-3">Pre-active</span>
-            </a>
-            
-            <div className="ml-4 mt-2 space-y-1">
-              {preActiveItems.map((item, index) => (
-                <a
-                  key={index}
-                  href="#"
-                  className={`block px-4 py-2.5 text-sm rounded-lg transition-colors duration-200 ${
-                    item.active
-                      ? 'bg-gray-800 text-white'
-                      : 'text-gray-300 hover:bg-gray-700 hover:text-white'
-                  }`}
-                >
-                  {item.label}
-                </a>
-              ))}
-            </div>
-          </div>
-        </nav>
-      </div>
+        {/* Static Links */}
+        <SidebarItem icon={<LayoutDashboard size={20} />} label="Dashboard" />
+        <SidebarItem icon={<Box size={20} />} label="Nexus" />
+        <SidebarItem icon={<FileText size={20} />} label="Intake" />
 
-      {/* Footer Links */}
-      <div className="border-t border-gray-700 pt-4 pb-6">
-        <nav className="px-4 space-y-1">
-          {footerItems.map((item, index) => (
-            <a
-              key={index}
-              href="#"
-              className="sidebar-link"
-            >
-              {item.icon}
-              <span className="ml-3">{item.label}</span>
-            </a>
-          ))}
-          
-          {/* Logout */}
-          <a
-            href="#"
-            className="sidebar-link text-red-400 hover:bg-red-900 hover:text-red-300"
+        <div className="pt-4 pb-2">
+          <div className="h-px bg-gray-100 mx-2"></div>
+        </div>
+
+        {/* Collapsible Services Section */}
+        <div>
+          <button
+            onClick={() => toggleSection('services')}
+            className="w-full flex items-center justify-between px-3 py-2 text-sm font-medium text-gray-600 hover:bg-gray-50 rounded-lg transition-colors"
           >
-            <LogOut className="w-5 h-5" />
-            <span className="ml-3">Logout</span>
-          </a>
-        </nav>
+            <div className="flex items-center gap-3">
+              <Monitor size={20} />
+              <span>Services</span>
+            </div>
+            {expanded.services ? <ChevronDown size={16} /> : <ChevronRight size={16} />}
+          </button>
+
+          {expanded.services && (
+            <div className="mt-1 ml-4 pl-4 border-l border-gray-100 space-y-1">
+              <SidebarSubItem icon={<Monitor size={16} />} label="Pre-active" />
+              <SidebarSubItem icon={<ShieldCheck size={16} />} label="Active" active />
+              <SidebarSubItem icon={<Ban size={16} />} label="Blocked" />
+              <SidebarSubItem icon={<XCircle size={16} />} label="Closed" />
+            </div>
+          )}
+        </div>
+
+        {/* Collapsible Invoices Section */}
+        <div>
+          <button
+            onClick={() => toggleSection('invoices')}
+            className="w-full flex items-center justify-between px-3 py-2 text-sm font-medium text-gray-600 hover:bg-gray-50 rounded-lg transition-colors"
+          >
+            <div className="flex items-center gap-3">
+              <FileText size={20} />
+              <span>Invoices</span>
+            </div>
+            {expanded.invoices ? <ChevronDown size={16} /> : <ChevronRight size={16} />}
+          </button>
+
+          {expanded.invoices && (
+            <div className="mt-1 ml-4 pl-4 border-l border-gray-100 space-y-1">
+              <SidebarSubItem icon={<FileClock size={16} />} label="Proforma Invoices" />
+              <SidebarSubItem icon={<FileCheck size={16} />} label="Final Invoices" />
+            </div>
+          )}
+        </div>
+
+      </nav>
+
+      {/* Footer */}
+      <div className="p-4 border-t border-gray-100">
+        <button className="flex items-center gap-3 px-3 py-2 text-sm font-medium text-red-600 hover:bg-red-50 rounded-lg w-full transition-colors">
+          <LogOut size={20} />
+          <span>Logout</span>
+        </button>
       </div>
-    </div>
+    </aside>
   );
 };
+
+// Helper components
+const SidebarItem = ({ icon, label, active = false }) => (
+  <a
+    href="#"
+    className={`flex items-center gap-3 px-3 py-2.5 text-sm font-medium rounded-lg transition-colors ${active
+        ? 'bg-gray-100 text-gray-900'
+        : 'text-gray-600 hover:bg-gray-50 hover:text-gray-900'
+      }`}
+  >
+    {icon}
+    <span>{label}</span>
+  </a>
+);
+
+const SidebarSubItem = ({ icon, label, active = false }) => (
+  <a
+    href="#"
+    className={`flex items-center gap-3 px-3 py-2 text-sm rounded-lg transition-colors ${active
+        ? 'bg-gray-100 text-gray-900 font-medium'
+        : 'text-gray-500 hover:bg-gray-50 hover:text-gray-900'
+      }`}
+  >
+    {icon}
+    <span>{label}</span>
+  </a>
+);
 
 export default Sidebar;

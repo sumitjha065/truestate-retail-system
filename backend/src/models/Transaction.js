@@ -230,9 +230,32 @@ transactionSchema.statics.searchWithFilters = async function ({
   const sortOptions = {};
   const dir = sortOrder === "asc" ? 1 : -1;
 
-  if (sortBy === "Customer Name") sortOptions["Customer Name"] = dir;
-  else if (sortBy === "Quantity") sortOptions["Quantity"] = dir;
-  else sortOptions["Date"] = dir;
+  // List of fields allowed for sorting to prevent injection or errors
+  const allowedSortFields = [
+    "Transaction ID",
+    "Date",
+    "Customer ID",
+    "Customer Name",
+    "Phone Number",
+    "Gender",
+    "Age",
+    "Product Category",
+    "Quantity",
+    "Total Amount",
+    "Customer Region",
+    "Product ID",
+    "Employee Name",
+    "Final Amount",
+    "Discount Percentage",
+    "Order Status"
+  ];
+
+  if (allowedSortFields.includes(sortBy)) {
+    sortOptions[sortBy] = dir;
+  } else {
+    // Default sort
+    sortOptions["Date"] = dir;
+  }
 
   const skip = (page - 1) * limit;
 

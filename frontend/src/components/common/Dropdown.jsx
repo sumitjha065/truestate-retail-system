@@ -1,21 +1,8 @@
-/**
- * @file Dropdown.jsx
- * @description Reusable dropdown component with support for single/multi-select and custom styling.
- */
+// Reusable dropdown component with support for single/multi-select.
 import React, { useState, useRef, useEffect } from 'react';
 import { ChevronDown } from 'lucide-react';
 
-/**
- * Dropdown Component
- * @param {Object} props
- * @param {string} props.label - Label text above the dropdown.
- * @param {Array} props.options - Array of option objects { value, label, count? }.
- * @param {any} props.value - Selected value(s). Array if multiple, single value otherwise.
- * @param {Function} props.onChange - Callback with new value(s).
- * @param {boolean} [props.multiple=false] - Support multi-selection.
- * @param {string} [props.placeholder='Select...'] - Placeholder text.
- * @param {string} [props.className=''] - Additional CSS classes.
- */
+// Dropdown Component
 const Dropdown = ({
   label,
   options = [],

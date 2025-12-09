@@ -1,7 +1,4 @@
-/**
- * @file useFilters.js
- * @description Custom hook to fetch dynamic filter options (regions, categories, etc.) from the backend.
- */
+// Custom hook to fetch dynamic filter options from the backend.
 import { useState, useEffect } from "react";
 import { transactionService } from "../services/transactionService";
 
@@ -14,10 +11,7 @@ const EMPTY_OPTIONS = {
   tags: [],
 };
 
-/**
- * Hook to load and store filter dropdown options.
- * @returns {Object} filterOptions object and loading state.
- */
+// Hook to load and store filter dropdown options
 export const useFilters = () => {
   const [filterOptions, setFilterOptions] = useState(EMPTY_OPTIONS);
   const [loading, setLoading] = useState(true);

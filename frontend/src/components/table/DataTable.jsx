@@ -1,6 +1,6 @@
 
 
-// src/components/table/DataTable.jsx
+// Main data table component handling loading and error states.
 import React, { useState } from "react";
 import TableHeader from "./TableHeader";
 import TableRow from "./TableRow";

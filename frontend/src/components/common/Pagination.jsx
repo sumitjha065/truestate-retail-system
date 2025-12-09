@@ -1,19 +1,9 @@
 
-/**
- * @file Pagination.jsx
- * @description Reusable pagination control component with page numbers and navigation buttons.
- */
+// Reusable pagination control component with page numbers and navigation buttons.
 import React from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 
-/**
- * Pagination Component
- * @param {Object} props
- * @param {number} props.currentPage - The current active page (1-based).
- * @param {number} props.totalPages - Total number of available pages.
- * @param {Function} props.onPageChange - Callback function for page selection.
- * @param {number} [props.maxVisiblePages=5] - Max number of page buttons to show.
- */
+// Pagination Component
 const Pagination = ({ currentPage, totalPages, onPageChange, maxVisiblePages = 5 }) => {
   if (totalPages <= 1) return null;
 

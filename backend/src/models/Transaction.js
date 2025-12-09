@@ -1,8 +1,4 @@
-/**
- * @file Transaction.js
- * @description Mongoose model for the 'sales' collection.
- * Defines the schema, indexes, and static methods for advanced searching and filtering.
- */
+// Mongoose model for the 'sales' collection defining schema and static methods.
 
 const mongoose = require("mongoose");
 
@@ -10,11 +6,7 @@ const mongoose = require("mongoose");
    GETTERS FOR CLEANING RAW MONGODB VALUES
 --------------------------------------------- */
 
-/**
- * Type Getter: Converts BSON Long objects to strings for JSON safety.
- * @param {Object|String} v - The raw value from MongoDB.
- * @returns {String} The string representation of the phone number.
- */
+// Helper to stringify Long objects
 const phoneNumberGetter = (v) => {
   if (!v) return "";
   if (v && typeof v === "object" && v.$numberLong) {
@@ -143,18 +135,7 @@ transactionSchema.virtual("phoneNumberString").get(function () {
    SEARCH + FILTER + SORT + PAGINATION
 --------------------------------------------- */
 
-/**
- * Advanced search method with support for pagination, sorting, and multi-field filtering.
- * 
- * @param {Object} options - Search options.
- * @param {number} [options.page=1] - Current page number.
- * @param {number} [options.limit=10] - Number of items per page.
- * @param {string} [options.search=""] - Search term (Name or Phone).
- * @param {string} [options.sortBy="Date"] - Field to sort by.
- * @param {string} [options.sortOrder="desc"] - Sort direction ('asc' or 'desc').
- * @param {Object} [options.filters={}] - Dictionary of active filters.
- * @returns {Promise<Object>} Object containing transactions array and pagination metadata.
- */
+// Advanced search with filters, sorting, and pagination
 transactionSchema.statics.searchWithFilters = async function ({
   page = 1,
   limit = 10,
@@ -300,10 +281,7 @@ transactionSchema.statics.searchWithFilters = async function ({
    FILTER OPTIONS FOR DROPDOWNS
 --------------------------------------------- */
 
-/**
- * Retrieves all distinct values for filterable fields to populate frontend dropdowns.
- * @returns {Promise<Object>} Object containing arrays of distinct values for each filter category.
- */
+// Get distinct values for filter dropdowns
 transactionSchema.statics.getFilterOptions = async function () {
   const [regions, genders, categories, paymentMethods, orderStatuses, tags] =
     await Promise.all([

@@ -1,16 +1,9 @@
-/**
- * @file useTransactions.js
- * @description Custom hook for managing transaction state, searching, filtering, and pagination.
- * Centralizes all data fetching logic for the Dashboard.
- */
+// Custom hook for managing transaction state, searching, filtering, and pagination.
 import { useState, useEffect, useCallback } from "react";
 import { transactionService } from "../services/transactionService";
 import { DEFAULT_FILTERS } from "../utils/constants";
 
-/**
- * Hook to manage transaction data lifecycle.
- * @returns {Object} Data, loading state, and handlers for UI interactions.
- */
+// Hook to manage transaction data lifecycle
 export const useTransactions = () => {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -28,14 +21,9 @@ export const useTransactions = () => {
 
   // Fetch transactions
 
-  // ---------------------------------------------------------------------------
-  // DATA FETCHING
-  // ---------------------------------------------------------------------------
 
-  /**
-   * Fetches transactions based on current state (page, filters, sort).
-   * Memoized to prevent unnecessary re-renders.
-   */
+
+  // Fetch transactions based on current state
   const fetchTransactions = useCallback(async () => {
     setLoading(true);
     setError(null);
@@ -87,10 +75,7 @@ export const useTransactions = () => {
     }
   }, [page, search, sortBy, sortOrder, filters]);
 
-  /**
-   * Fetches equivalent dashboard stats for the current filter set.
-   * Runs independently of transaction list fetching to allow parallel loading.
-   */
+  // Fetches equivalent dashboard stats for the current filter set
   const fetchStats = useCallback(async () => {
     try {
       const params = {

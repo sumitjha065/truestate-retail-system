@@ -1,7 +1,4 @@
-/**
- * @file FilterBar.jsx
- * @description Component rendering the row of filter dropdowns and date/age inputs.
- */
+// Component rendering the row of filter dropdowns and date/age inputs.
 import React from 'react';
 import Dropdown from '../common/Dropdown';
 import AgeInput from './AgeInput';
@@ -13,14 +10,7 @@ import {
   ORDER_STATUSES,
 } from '../../utils/constants';
 
-/**
- * FilterBar Component
- * @param {Object} props
- * @param {Object} props.filters - Current filter state object.
- * @param {Function} props.onFilterChange - Handler for generic filter updates.
- * @param {Function} props.onAgeRangeChange - Handler for age range updates.
- * @param {Function} props.onDateRangeChange - Handler for date range updates.
- */
+// FilterBar Component
 const FilterBar = ({
   filters,
   onFilterChange,

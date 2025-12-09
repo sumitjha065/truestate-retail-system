@@ -1,19 +1,8 @@
-/**
- * @file transactionService.js
- * @description Service layer for handling all transaction-related API calls.
- * Normalizes API responses to ensure consistent data structure across the app.
- */
+// Service layer for handling all transaction-related API calls and normalization.
 import api from "./api";
 
 export const transactionService = {
-  // -----------------------------
-  // Transactions list
-  // -----------------------------
-  /**
-   * Fetches paginated transaction data.
-   * @param {Object} params - Query parameters (page, limit, filters).
-   * @returns {Promise<Object>} Normalized response body.
-   */
+  // Fetches paginated transaction data
   async getTransactions(params) {
     // api.get might return:
     //  - axios response  -> { data: { ...body } }
@@ -24,20 +13,15 @@ export const transactionService = {
     return body;
   },
 
-  // -----------------------------
-  // Filter options (for dropdowns)
-  // -----------------------------
-  /**
-   * Fetches available filter options (regions, categories, etc.).
-   * @returns {Promise<Object>} Object containing arrays for each filter type.
-   */
+  // Get dynamic filter options from backend
+
   async getFilterOptions() {
     const res = await api.get("/transactions/filter-options");
     const body = res && res.data !== undefined ? res.data : res;
 
     // body can be:
-    //  1) { success, data: { regions, ... } }
-    //  2) { regions, genders, ... }
+    //  1) {success, data: {regions, ... } }
+    //  2) {regions, genders, ... }
     const inner = body && body.data ? body.data : body;
 
     return {
@@ -50,18 +34,11 @@ export const transactionService = {
     };
   },
 
-  // -----------------------------
-  // Dashboard stats (with filters)
-  // -----------------------------
-  /**
-   * Fetches dashboard statistics based on current filters.
-   * @param {Object} params - Active filters and search terms.
-   * @returns {Promise<Object>} Object containing calculated stats.
-   */
+  // Fetch dashboard statistics based on current filters
   async getDashboardStats(params) {
     const res = await api.get("/stats/dashboard", { params });
     const body = res && res.data !== undefined ? res.data : res;
-    // body can be { success, data: {...} } or directly {...}
+    // body can be {success, data: {...} } or directly {...}
     const stats = body && body.data ? body.data : body;
     return stats;
   },

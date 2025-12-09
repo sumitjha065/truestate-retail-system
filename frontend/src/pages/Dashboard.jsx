@@ -1,8 +1,4 @@
-/**
- * @file Dashboard.jsx
- * @description Main dashboard view for the Sales Management System.
- * Integrates data fetching, filtering, summary metrics, and the data table.
- */
+// Main dashboard view integrating filtering, metrics, and data table.
 import React from "react";
 import { useTransactions } from "../hooks/useTransactions";
 import MetricCard from "../components/dashboard/MetricCard";
@@ -36,9 +32,7 @@ const Dashboard = () => {
     refresh,
   } = useTransactions();
 
-  // ---------------------------------------------------------------------------
-  // HANDLERS
-  // ---------------------------------------------------------------------------
+  // Handlers
 
   const handleFilterChange = (filterName, value) => updateFilter(filterName, value);
   const handleAgeRangeChange = (min, max) => updateAgeRange(min, max);

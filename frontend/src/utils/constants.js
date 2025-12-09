@@ -1,5 +1,4 @@
-// Add this NEW TABLE_COLUMNS
-// Table Columns Configuration
+// Global constants for table configuration, sorting, and filter options.
 export const TABLE_COLUMNS = [
   { key: "Transaction ID", label: "Transaction ID", sortable: true, width: "130px" },
   { key: "Date", label: "Date", sortable: true, width: "120px" },

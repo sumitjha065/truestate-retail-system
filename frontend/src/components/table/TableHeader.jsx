@@ -1,7 +1,7 @@
 
 
 
-// src/components/table/TableHeader.jsx
+// Table header component with sorting indicators.
 import React from "react";
 import { ArrowUpDown } from "lucide-react";
 import { TABLE_COLUMNS } from "../../utils/constants";

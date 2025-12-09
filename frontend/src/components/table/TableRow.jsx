@@ -2,7 +2,7 @@
 
 
 
-// src/components/table/TableRow.jsx
+// Single table row component with copy functionality.
 import React, { useState } from "react";
 import { formatters } from "../../utils/formatters";
 

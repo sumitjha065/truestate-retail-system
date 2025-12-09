@@ -1,24 +1,13 @@
-/**
- * @file statsController.js
- * @description Controller for calculating dashboard statistics.
- * Uses MongoDB aggregation pipelines to compute totals based on dynamic filters.
- */
-
+// Controller for calculating dashboard statistics.
 const Transaction = require("../models/Transaction");
 
-// Helper to normalize array filters (handle single string vs array)
+
 const normalizeArray = (val) => {
   if (!val || val === 'All') return null;
   return Array.isArray(val) ? val : [val];
 };
 
-/**
- * Constructs a MongoDB query object from frontend API parameters.
- * Handles search (using regex) and complex filters like age/date ranges.
- * 
- * @param {Object} query - Express request query object.
- * @returns {Object} A MongoDB query filter object.
- */
+
 const buildFilters = (query) => {
   const filter = {};
 
@@ -68,8 +57,6 @@ const buildFilters = (query) => {
     const min = parseInt(ageData.min) || 0;
     const max = parseInt(ageData.max) || 150;
 
-    // Check if we need to mix with existing $or (from search)
-    // We use $and to safely combine them
     const ageExpr = {
       $and: [
         { $gte: [{ $toInt: "$Age" }, min] },
@@ -100,14 +87,7 @@ const buildFilters = (query) => {
   return filter;
 };
 
-/**
- * Retrieves comprehensive dashboard statistics (counts, totals, discounts) based on active filters.
- * Runs multiple aggregation pipelines in parallel for performance.
- * 
- * @param {Object} req - Express request object.
- * @param {Object} res - Express response object.
- * @returns {Promise<void>} JSON response with calculated statistics.
- */
+
 const getDashboardStats = async (req, res) => {
   try {
     const mongoFilters = buildFilters(req.query);

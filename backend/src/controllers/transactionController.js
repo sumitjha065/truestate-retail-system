@@ -1,19 +1,7 @@
-/**
- * @file transactionController.js
- * @description Controller handling transaction-related API requests.
- * Includes methods for listing (with filters/search), retrieving details, and getting filter options.
- */
-
+// Controller handling transaction-related API requests.
 const Transaction = require("../models/Transaction");
 
-/**
- * Retrieves a paginated list of transactions with optional filtering and sorting.
- * 
- * @param {Object} req - Express request object.
- * @param {Object} req.query - Query parameters for filtering, sorting, and pagination.
- * @param {Object} res - Express response object.
- * @returns {Promise<void>} JSON response with transaction data and pagination info.
- */
+
 const getTransactions = async (req, res) => {
   try {
     const {
@@ -117,6 +105,7 @@ const getTransactions = async (req, res) => {
  * @param {Object} res - Express response object.
  * @returns {Promise<void>} JSON response with arrays of distinct values.
  */
+/*  */
 const getFilterOptions = async (req, res) => {
   try {
     const filterOptions = await Transaction.getFilterOptions();

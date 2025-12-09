@@ -1,8 +1,4 @@
-/**
- * @file index.js
- * @description Entry point for the Retail Management System API.
- * Handles server configuration, database connection, middleware setup, and route aggregation.
- */
+// Entry point for the Retail Management System API handling server and database connection.
 
 const express = require("express");
 const mongoose = require("mongoose");
